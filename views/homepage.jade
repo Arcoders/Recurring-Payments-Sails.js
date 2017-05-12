@@ -1,0 +1,31 @@
+extends ./layout
+
+
+block body
+    .container
+        .row
+            .col-xs-10.col-md-7
+                    each book in books
+                        .card
+                            h3
+                                a(href="/book/#{book.id}")= book.title
+                            p= book.description
+                            if user && user.admin
+                                .actions
+                                    a(href="/book/#{book.id}/edit" style="margin-right: 1em") Editar
+                                    a(href="/book/#{book.id}/delete" class="text-danger") Eliminar
+            .col-xs-10.col-md-5
+                .card
+                    p
+                        span Bienvenido 
+                        strong= user.email
+                    if !subscription
+                        a(href="/subscription" class="btn btn-info") Actualizar a premium
+                    else if subscription.isValid()
+                        p.large-padding.bg-success Subscripción activa
+                    else
+                        p.large-padding.bg-warning Subscripción #{subscription.status}
+                    if subscription && subscription.isActive()
+                        form(action="/subscription/#{subscription.stripe_id}?_method=DELETE" method="POST" class="form-inline")
+                            input(type='hidden' name="_method" value="DELETE")
+                            input(type='submit' value="Cancelar cobro recurrente" class='btn btn-danger')

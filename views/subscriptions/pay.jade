@@ -1,0 +1,40 @@
+extends ../layout
+
+block body
+    .container
+        .card.no-padding
+            header.large-padding.teal.white-text
+                h2 Completa tu pago
+                p
+                    | Estas adquiriendo tu plan 
+                    strong.black-text= plan.name
+            .large-padding
+                form(action="/subscription" method="POST" id="paymentForm")
+                    input(type="hidden" name="planId" value="#{plan.id}")
+                    .errors.red.white-text
+                    .form-group
+                        label Número de tarjeta
+                        input(type="text" name="cardNumber" id="card-number" class="form-control" placeholder="4242 4242 4242 4242" required)
+                    .row
+                        .colxs-6.col-md-3
+                            .form-group
+                                label CVC
+                                input(type="text" name="cvc" id="cvc" class="form-control" maxlength="3" placeholder="CVC" required)
+                        .col-xs-6.col-md-6
+                            .form-group
+                                .row
+                                    .col-xs-6
+                                        label Mes experación
+                                        select(name="expirationMonth" id="expiration-month" class="form-control" required)
+                                            -for(var i = 1; i <= 12; i++)
+                                                    if i < 10
+                                                        option(value="0#{i}") 0#{i}
+                                                    else
+                                                        option(value="#{i}") #{i}
+                                    .col-xs-6
+                                        label Año de expiratión
+                                        select(name="expirationYear" id="expiration-year" class="form-control" required)
+                                            -for(var i = 2017; i <= 2023; i++)
+                                                        option(value=i)= i
+                    .top-space
+                        button(type="button" id="submitBtn" class="plan-btn btn teal white-text") Adquirir plan

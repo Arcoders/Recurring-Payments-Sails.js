@@ -1,0 +1,33 @@
+extends ../layout
+
+block body
+    .container
+        h1 Editar #{book.title}
+        hr
+        form(action="/book/#{book.id}?_method=PUT" method='POST' style='margin-top:2em')
+            .form-group
+                .row
+                    .col-xs-4.col-md-2
+                        label(for='title') Título del Libro
+                    .col-xs-8.col-md-10
+                        input(type='text' name='title' class='form-control' id='title' value=book.title required)
+            .form-group
+                .row
+                    .col-xs-4.col-md-2
+                        label(for='description') Descripción
+                    .col-xs-8.col-md-10
+                        textarea(name='description' id="description" class="form-control")=book.description
+            .form-group
+                .row
+                    .col-xs-4.col-md-2
+                        label(for='pages') Número de páginas
+                    .col-xs-8.col-md-10
+                        input(type='number' name='pages' class='form-control' id="pages" value=book.pages)
+            .form-group
+                .row
+                    .col-xs-4.col-md-2
+                        label(for='publishedAt') Fecha de publicación
+                    .col-xs-8.col-md-10
+                        input(type='date' name='publishedAt' class='form-control' id="publishedAt" value=book.publishedAt)
+            .form-group.text-right
+                input(type="submit" class="btn btn-success" value="Guardar libro")

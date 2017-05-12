@@ -1,0 +1,28 @@
+extends ../layout
+
+block body
+    .container
+        table.table
+            caption Lista de planes en la plataforma
+            thead
+                tr
+                    th # Id
+                    th Usuario
+                    th Plan
+                    th Stripe ID
+                    th Status
+                    th Fecha creación
+                    th Acciones
+            tbody
+                each subscription in subscriptions
+                  tr 
+                      td= subscription.id 
+                      td= subscription.user 
+                      td= subscription.plan
+                      td= subscription.stripeId
+                      td= subscription.status
+                      td= subscription.createdAt
+                      td 
+                          form(action="/plan/#{subscription.id}?_method=DELETE" class='form-inline' method='POST')
+                              input(type="submit" class="btn btn-danger" value="Eliminar")
+                    

@@ -1,0 +1,29 @@
+extends ../layout.jade
+block body
+    .container
+        h1 Crear nuevo plan de suscripción
+        form(action='/plan' method='POST' style='margin-top: 2em')
+            .form-group
+                .row
+                    .col-xs-6.col-md-2
+                        label(for='name') Nombre del plan
+                    .col-xs-6.col-md-10
+                        input(type='text' name='name' id='name' class='form-control' required)
+            .form-group
+                .row
+                    .col-xs-6.col-md-2
+                        label(for='amount') Costo
+                    .col-xs-6.col-md-10
+                        input(type='number' name='amount' id='amount' class='form-control' required)
+            .form-group
+                .row
+                    .col-xs-6.col-md-2
+                        label(for='interval') Intérvalo
+                    .col-xs-6.col-md-10
+                        select(name='interval' id='interval' class='form-control' required)
+                            option(value="day") Diario
+                            option(value="week") Semanal
+                            option(value='month') Mensual
+                            option(value="year") Anual
+            .form-group.text-right
+                input(type='submit' class='btn btn-success' value="Guardar plan")

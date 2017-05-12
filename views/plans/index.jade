@@ -1,0 +1,28 @@
+extends ../layout
+
+block body
+    .container
+        .text-right
+            a(href='/plan/new' class='btn btn-info') Nuevo plan
+        table.table
+            caption Lista de planes en la plataforma
+            thead
+                tr
+                    th # Id
+                    th Nombre
+                    th Costo
+                    th Periodo
+                    th Válido
+                    th Acciones
+            tbody
+                each plan in plans
+                  tr 
+                      td= plan.id 
+                      td= plan.name 
+                      td= plan.amount 
+                      td= plan.interval 
+                      td= plan.stripe_valid
+                      td 
+                          form(action="/plan/#{plan.id}?_method=DELETE" class='form-inline' method='POST')
+                              input(type="submit" class="btn btn-danger" value="Eliminar")
+                    

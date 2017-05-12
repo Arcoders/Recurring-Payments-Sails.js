@@ -1,0 +1,24 @@
+extends ../layout
+
+block body
+    .container
+        header.big-padding.grey.darken-4.white-text
+            h2 Suscríbete al mejor plan para leer libros
+            p Accede a todos los libros en nuestra editorial, por el menor precio
+        .row.text-center
+            each plan in plans
+                .col-xs-10.col-md-6.col-lg-4.border.no-padding.card.center-col.right-space
+                    header.large-padding.red.darken-2.white-text.text-center
+                        p.be-big.no-margin= plan.amount / 1000
+                        p.no-margin.be-medium EUR/#{plan.interval}
+                    .large-padding.text-left
+                    h3= plan.name
+                    ul.plan-benefits.no-margin
+                        li Todos nuestros libros en descarga
+                        li Acceso exclusivo a nuestros libros
+                        li Acceso móvil a los libros
+                        li Sin límites de descarga
+                    .text-center
+                        a.btn.btn-info.be-medium.plan-btn.blue.blue.darken-3(href="/pay/#{plan.id}") Adquirir este plan
+                        
+                    
